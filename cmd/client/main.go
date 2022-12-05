@@ -11,7 +11,7 @@ import (
 
 func main() {
 	args := strings.Join(os.Args[1:], " ")
-  requestUrl := "http://localhost:3000/translate?s=" + url.QueryEscape(args)
+  requestUrl := "http://localhost:3000?s=" + url.QueryEscape(args)
 	response, err := http.Get(requestUrl)
 	if err != nil {
 		fmt.Printf("[error] http request failed: %s", err)
