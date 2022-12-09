@@ -10,7 +10,7 @@ import (
 
 func main() {
 	r := chi.NewRouter()
-  r.Use(middleware.Logger)
+	r.Use(middleware.Logger)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		msg := r.URL.Query().Get("s")
 		translated := translate(msg)
