@@ -1,7 +1,5 @@
 # syntax=docker/dockerfile:1
 FROM --platform=${BUILDPLATFORM} golang:1.19.4-alpine AS base
-ARG TARGETOS
-ARG TARGETARCH
 ENV CGO_ENABLED=0
 WORKDIR /src
 RUN --mount=type=cache,target=/go/pkg/mod \
@@ -10,11 +8,15 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     go mod download -x
 
 FROM base AS build-client
+ARG TARGETOS
+ARG TARGETARCH
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=bind,target=. \
     GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /bin/client ./cmd/client
 
 FROM base AS build-server
+ARG TARGETOS
+ARG TARGETARCH
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=bind,target=. \
     GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /bin/server ./cmd/server
