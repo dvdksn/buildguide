@@ -10,7 +10,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-func play() error {
+func start() error {
 	p := tea.NewProgram(initialModel(), tea.WithAltScreen())
 
 	_, err := p.Run()

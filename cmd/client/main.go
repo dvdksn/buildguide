@@ -1,13 +1,19 @@
 package main
 
 import (
-	"log"
+	"fmt"
+	"os"
 )
 
 func main() {
 	err := ping()
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err.Error())
+		os.Exit(1)
 	}
-	log.Fatal(play())
+	err = start()
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 }

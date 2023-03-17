@@ -8,6 +8,9 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
+// version is defined using build args
+var version string
+
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -17,6 +20,10 @@ func main() {
 		w.Write([]byte(translated))
 	})
 
+	log.Println("Starting server...")
+	if version != "" {
+		log.Printf("Version: %s", version)
+	}
 	log.Println("Listening on HTTP port 3000")
 	log.Fatal(http.ListenAndServe(":3000", r))
 }
